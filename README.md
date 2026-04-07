@@ -1,4 +1,4 @@
-# WP-ClaudeCode
+# WP-Claude-Code
 
 **A lean, composable AI agent on WordPress — VPS or local.**
 
