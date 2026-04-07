@@ -213,3 +213,27 @@ Update MEMORY.md when you learn something persistent — read it first, append.
     log "Generated CLAUDE.md at $SITE_PATH/CLAUDE.md (inline)"
   fi
 }
+
+# Merge caller-provided MCP servers into .mcp.json (always runs — additive to existing file)
+merge_mcp_servers() {
+  if [ -z "${MCP_SERVERS:-}" ]; then
+    return
+  fi
+
+  if [ "$DRY_RUN" = true ]; then
+    echo -e "${BLUE}[dry-run]${NC} Would merge MCP_SERVERS into $SITE_PATH/.mcp.json"
+    return
+  fi
+
+  command -v jq &>/dev/null || error "MCP_SERVERS requires jq"
+  log "Merging MCP servers into .mcp.json..."
+
+  local mcp_json="$SITE_PATH/.mcp.json"
+  if [ -f "$mcp_json" ]; then
+    jq --argjson servers "$MCP_SERVERS" '.mcpServers = $servers' "$mcp_json" \
+      > "$mcp_json.tmp" \
+      && mv "$mcp_json.tmp" "$mcp_json"
+  else
+    jq -n --argjson servers "$MCP_SERVERS" '{"mcpServers": $servers}' > "$mcp_json"
+  fi
+}

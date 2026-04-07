@@ -159,6 +159,8 @@ ENVIRONMENT VARIABLES:
   DB_PASS            Database password (auto-generated if not set)
   AGENT_SLUG         Override agent slug (default: derived from domain)
   CC_CONNECT_TOKEN   cc-connect bot token (skip interactive setup)
+  EXTRA_PLUGINS      Space-separated slug:url pairs for additional plugins
+  MCP_SERVERS        JSON object merged into .mcp.json mcpServers key (requires jq)
 
 EXAMPLES:
   # Fresh VPS
@@ -217,11 +219,13 @@ setup_multisite
 create_service_user
 install_data_machine
 create_dm_agent
+install_extra_plugins
 setup_nginx
 setup_ssl
 setup_service_permissions
 discover_dm_paths
 generate_claude_md
+merge_mcp_servers
 install_skills
 install_chat_bridge
 print_summary

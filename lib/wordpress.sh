@@ -50,6 +50,25 @@ fix_ownership() {
   fi
 }
 
+# Install caller-provided extra plugins from EXTRA_PLUGINS env var.
+# Format: space-separated slug:url pairs (e.g. "mattic:https://github.com/chubes4/mattic.git")
+install_extra_plugins() {
+  if [ -z "${EXTRA_PLUGINS:-}" ]; then
+    return
+  fi
+
+  log "Phase 4.6: Installing extra plugins..."
+  for entry in $EXTRA_PLUGINS; do
+    slug="${entry%%:*}"
+    url="${entry#*:}"
+    if [ -z "$slug" ] || [ -z "$url" ]; then
+      warn "Skipping malformed EXTRA_PLUGINS entry: $entry"
+      continue
+    fi
+    install_plugin "$slug" "$url"
+  done
+}
+
 setup_database() {
   if [ "$MODE" = "fresh" ]; then
     log "Phase 2: Configuring database..."
