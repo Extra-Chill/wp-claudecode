@@ -1,0 +1,11 @@
+{
+  "id": "wp-claudecode",
+  "auto_cleanup": false,
+  "changelog_target": "docs/changelog.md",
+  "version_targets": [
+    {
+      "file": "VERSION",
+      "pattern": "^([0-9.]+)$"
+    }
+  ]
+}
