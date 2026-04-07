@@ -1,6 +1,6 @@
-# wp-claudecode Setup Assistant
+# wp-claude-code Setup Assistant
 
-You are helping the user set up wp-claudecode — a bridge between WordPress, Data Machine, and Claude Code.
+You are helping the user set up wp-claude-code — a bridge between WordPress, Data Machine, and Claude Code.
 
 ## Interview
 

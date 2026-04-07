@@ -2,7 +2,7 @@
 
 **A lean, composable AI agent on WordPress — VPS or local.**
 
-wp-claudecode puts an AI agent on any WordPress install with WordPress as its operating layer. Each component does one thing: [Claude Code](https://docs.anthropic.com/en/docs/claude-code) handles code, [Data Machine](https://github.com/Extra-Chill/data-machine) handles memory and scheduling, and [cc-connect](https://npmjs.com/package/cc-connect) handles communication (Discord, Telegram, Slack, or none). The agent's context window stays clean — no overhead for systems it's not using.
+wp-claude-code puts an AI agent on any WordPress install with WordPress as its operating layer. Each component does one thing: [Claude Code](https://docs.anthropic.com/en/docs/claude-code) handles code, [Data Machine](https://github.com/Extra-Chill/data-machine) handles memory and scheduling, and [cc-connect](https://npmjs.com/package/cc-connect) handles communication (Discord, Telegram, Slack, or none). The agent's context window stays clean — no overhead for systems it's not using.
 
 Runs on a dedicated VPS for always-on autonomous operation, or locally on your Mac/Linux machine for development and personal use.
 
@@ -35,7 +35,7 @@ Data Machine creates three memory files on activation. They're injected into eve
 
 ## Standalone or Fleet
 
-wp-claudecode works in two modes with the same setup:
+wp-claude-code works in two modes with the same setup:
 
 **Standalone** — Data Machine handles autonomy. The agent self-schedules flows, queues tasks, runs on cron. No orchestrator needed.
 
@@ -48,8 +48,8 @@ wp-claudecode works in two modes with the same setup:
 Works with any existing WordPress install — [WordPress Studio](https://developer.wordpress.com/studio/), MAMP, manual, etc.
 
 ```bash
-git clone https://github.com/Extra-Chill/wp-claudecode.git
-cd wp-claudecode
+git clone https://github.com/Extra-Chill/wp-claude-code.git
+cd wp-claude-code
 EXISTING_WP=~/Studio/my-wordpress-website ./setup.sh --local
 ```
 
@@ -74,13 +74,13 @@ Studio is auto-detected. The generated CLAUDE.md includes `@STUDIO.md` and uses 
 
 #### Let Your Agent Do It
 
-Add the `wp-claudecode-setup` skill to your local Claude Code:
+Add the `wp-claude-code-setup` skill to your local Claude Code:
 
 ```bash
-cp -r skills/wp-claudecode-setup ~/.claude/skills/
+cp -r skills/wp-claude-code-setup ~/.claude/skills/
 ```
 
-Then: "Help me set up wp-claudecode on my VPS"
+Then: "Help me set up wp-claude-code on my VPS"
 
 Your local agent SSHs into the server, runs the setup, and your VPS agent wakes up.
 
@@ -88,8 +88,8 @@ Your local agent SSHs into the server, runs the setup, and your VPS agent wakes 
 
 ```bash
 ssh root@your-server-ip
-git clone https://github.com/Extra-Chill/wp-claudecode.git
-cd wp-claudecode
+git clone https://github.com/Extra-Chill/wp-claude-code.git
+cd wp-claude-code
 SITE_DOMAIN=yourdomain.com ./setup.sh
 systemctl start cc-connect
 ```
@@ -130,7 +130,7 @@ systemctl start cc-connect
 | nginx | Web server with PHP-FPM |
 | SSL | Let's Encrypt certificate |
 | systemd | Chat bridge service |
-| Credentials | `~/.wp-claudecode-credentials` |
+| Credentials | `~/.wp-claude-code-credentials` |
 
 ## Chat Bridge
 
@@ -144,7 +144,7 @@ Use `--no-chat` to skip cc-connect and run Claude Code directly in the terminal.
 
 ## Comparison with wp-opencode
 
-| Aspect | wp-opencode | wp-claudecode |
+| Aspect | wp-opencode | wp-claude-code |
 |--------|-------------|---------------|
 | Agent runtime | OpenCode | Claude Code |
 | Config format | `opencode.json` `{file:}` | `CLAUDE.md` `@` includes |
