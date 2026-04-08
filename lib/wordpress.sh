@@ -37,6 +37,13 @@ install_plugin() {
         --no-dev --no-interaction --working-dir="$plugin_dir" || \
         warn "Composer failed, some $slug features may not work"
     fi
+    if [ -f "$plugin_dir/package.json" ] || [ "$DRY_RUN" = true ]; then
+      log "Building $slug JS assets..."
+      run_cmd npm install --prefix "$plugin_dir" || \
+        warn "npm install failed for $slug"
+      run_cmd npm run build --prefix "$plugin_dir" || \
+        warn "npm build failed for $slug — admin pages may not work"
+    fi
   fi
 
   activate_plugin "$slug"
